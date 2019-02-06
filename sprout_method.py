@@ -28,10 +28,14 @@ def perform():
     for k, v in o_words:
         if len(k) > glength:
             glength = len(k)
+    for line in lines_to_print(glength, o_words):
+        print(line)
+
+def lines_to_print(glength, o_words):
+    lines = []
     for k, v in o_words:
         s = ' ' * (glength - len(k))
         if v < 10:
             s = s + ' '
-        print(k + ': ' + s + str(v))
-
-perform()
+        lines.append(k + ': ' + s + str(v))
+    return lines

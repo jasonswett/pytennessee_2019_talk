@@ -28,10 +28,20 @@ def perform():
     for k, v in o_words:
         if len(k) > glength:
             glength = len(k)
-    for k, v in o_words:
-        s = ' ' * (glength - len(k))
-        if v < 10:
-            s = s + ' '
-        print(k + ': ' + s + str(v))
+    word_list = WordList(glength, o_words)
+    for line in word_list.lines_to_print():
+        print(line)
 
-perform()
+class WordList:
+    def __init__(self, glength, o_words):
+        self.glength = glength
+        self.o_words = o_words
+
+    def lines_to_print(self):
+        lines = []
+        for k, v in self.o_words:
+            s = ' ' * (self.glength - len(k))
+            if v < 10:
+                s = s + ' '
+            lines.append(k + ': ' + s + str(v))
+        return lines
